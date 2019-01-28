@@ -4,6 +4,7 @@
 
 #include "Engine/World.h"
 #include "Engine/LocalPlayer.h"
+#include "GameFramework/PlayerController.h"
 #include "GameFramework/Controller.h"
 
 void ARobotAIController::BeginPlay()
@@ -29,6 +30,20 @@ void ARobotAIController::BeginPlay()
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("%s found a %s"), *ControlledRobot->GetName(), *PlayerRobot->GetName());
+	}
+}
+
+void ARobotAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	if (GetPlayerRobot())
+	{
+		// TODO Move towards player
+
+		// Aim towards the player
+		GetControlledRobot()->AimAt(GetPlayerRobot()->GetActorLocation());
+
+		// Fire if ready
 	}
 }
 
