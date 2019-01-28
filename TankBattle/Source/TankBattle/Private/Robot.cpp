@@ -16,6 +16,11 @@ void ARobot::AimAt(FVector HitLocation)
 	RobotAimingComponent->AimAt(HitLocation);
 }
 
+void ARobot::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+{
+	RobotAimingComponent->SetBarrelReference(BarrelToSet);
+}
+
 // Called when the game starts or when spawned
 void ARobot::BeginPlay()
 {
