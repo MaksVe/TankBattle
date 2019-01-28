@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "RobotAimingComponent.h"
+
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Robot.generated.h"
@@ -20,6 +22,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	URobotAimingComponent* RobotAimingComponent = nullptr;
 
 public:	
 	// Called every frame
