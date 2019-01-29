@@ -8,6 +8,8 @@
 #include "GameFramework/Pawn.h"
 #include "Robot.generated.h"
 
+class URobotBarrel;
+
 UCLASS()
 class TANKBATTLE_API ARobot : public APawn
 {
@@ -33,5 +35,9 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
+	void SetBarrelReference(URobotBarrel* BarrelToSet);
+
+private:
+	UPROPERTY(EditAnywhere, Category = Firing)
+	float LaunchSpeed = 100000.f; // TODO find sensible default
 };

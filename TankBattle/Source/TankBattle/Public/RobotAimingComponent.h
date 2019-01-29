@@ -6,7 +6,11 @@
 #include "Components/ActorComponent.h"
 #include "RobotAimingComponent.generated.h"
 
+// Forward Declaration
+class URobotBarrel;
 
+
+// Hold barrels' properties and Elevate method
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class TANKBATTLE_API URobotAimingComponent : public UActorComponent
 {
@@ -16,18 +20,11 @@ public:
 	// Sets default values for this component's properties
 	URobotAimingComponent();
 
-protected:
-	// Called when the game starts
-	virtual void BeginPlay() override;
-
-public:	
-	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	void AimAt(FVector HitLocation);
-
-	void SetBarrelReference(UStaticMeshComponent* BarrelToSet);
-
+	void AimAt(FVector HitLocation, float LaunchSpeed);
+	void SetBarrelReference(URobotBarrel* BarrelToSet);
+	// TODO add SetTurretReference
 private:
-	UStaticMeshComponent* Barrel = nullptr;
+	URobotBarrel* Barrel = nullptr;
+
+	void MoveBarrelTowards(FVector AimDirection);
 };

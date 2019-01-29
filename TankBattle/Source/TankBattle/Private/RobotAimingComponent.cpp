@@ -4,6 +4,8 @@
 
 #include "Engine/World.h"
 #include "Components/StaticMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
+#include "RobotBarrel.h"
 
 // Sets default values for this component's properties
 URobotAimingComponent::URobotAimingComponent()
@@ -15,34 +17,46 @@ URobotAimingComponent::URobotAimingComponent()
 	// ...
 }
 
-
-// Called when the game starts
-void URobotAimingComponent::BeginPlay()
+void URobotAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	Super::BeginPlay();
+	if (!Barrel) { return; }
 
-	// ...
-	
+	FVector OUTLaunchVelocity(0);
+	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
+	bool bHaveAimSolution = UGameplayStatics::SuggestProjectileVelocity
+	(
+		this,
+		OUTLaunchVelocity,
+		StartLocation,
+		HitLocation,
+		LaunchSpeed,
+		ESuggestProjVelocityTraceOption::DoNotTrace
+	);
+
+	if (bHaveAimSolution)
+	{
+		auto AimDirection = OUTLaunchVelocity.GetSafeNormal();
+		auto TankName = GetOwner()->GetName();
+		UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s"), *TankName, *AimDirection.ToString());
+		
+		MoveBarrelTowards(AimDirection);
+	}
 }
 
-
-// Called every frame
-void URobotAimingComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void URobotAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
-	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - BarrelRotator;
 
-	// ...
+
+	Barrel->Elevate(5);
 }
 
-void URobotAimingComponent::AimAt(FVector HitLocation)
-{
-	auto OurTankName = GetOwner()->GetName();
-	auto BarrelLocation = Barrel->GetComponentLocation().ToString();
-	UE_LOG(LogTemp, Warning, TEXT("%s aiming at %s from %s"), *OurTankName, *HitLocation.ToString(), *BarrelLocation);
-}
-
-void URobotAimingComponent::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void URobotAimingComponent::SetBarrelReference(URobotBarrel * BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
+
+
 

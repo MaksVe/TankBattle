@@ -13,10 +13,10 @@ ARobot::ARobot()
 
 void ARobot::AimAt(FVector HitLocation)
 {
-	RobotAimingComponent->AimAt(HitLocation);
+	RobotAimingComponent->AimAt(HitLocation, LaunchSpeed);
 }
 
-void ARobot::SetBarrelReference(UStaticMeshComponent * BarrelToSet)
+void ARobot::SetBarrelReference(URobotBarrel * BarrelToSet)
 {
 	RobotAimingComponent->SetBarrelReference(BarrelToSet);
 }
