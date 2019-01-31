@@ -2,6 +2,7 @@
 
 #include "Robot.h"
 #include "RobotAimingComponent.h"
+#include "Engine/World.h"
 
 // Sets default values
 ARobot::ARobot()
@@ -15,6 +16,12 @@ ARobot::ARobot()
 void ARobot::AimAt(FVector HitLocation)
 {
 	RobotAimingComponent->AimAt(HitLocation, LaunchSpeed);
+}
+
+void ARobot::Fire()
+{
+	auto Time = GetWorld()->GetTimeSeconds();
+	UE_LOG(LogTemp, Warning, TEXT("%f: Tank fire"), Time);
 }
 
 void ARobot::SetBarrelReference(URobotBarrel * BarrelToSet)
@@ -40,4 +47,6 @@ void ARobot::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
 }
+
+
 

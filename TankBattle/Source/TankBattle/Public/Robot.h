@@ -15,27 +15,28 @@ class TANKBATTLE_API ARobot : public APawn
 {
 	GENERATED_BODY()
 
-public:
+public:	
 	// Sets default values for this pawn's properties
 	ARobot();
 
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 	void AimAt(FVector HitLocation);
+
+	UFUNCTION(BlueprintCallable)
+	void Fire();
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetBarrelReference(URobotBarrel* BarrelToSet);
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(URobotTurret* TurretToSet);
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
 	URobotAimingComponent* RobotAimingComponent = nullptr;
-
-public:	
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetBarrelReference(URobotBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTurretReference(URobotTurret* TurretToSet);
 
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)

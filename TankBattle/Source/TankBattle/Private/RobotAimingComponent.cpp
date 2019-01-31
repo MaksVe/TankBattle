@@ -41,18 +41,9 @@ void URobotAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 	if (bHaveAimSolution)
 	{
 		auto AimDirection = OUTLaunchVelocity.GetSafeNormal();
-		auto TankName = GetOwner()->GetName();
-
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f aim solution found"), Time);
 		
 		MoveBarrelTowards(AimDirection);
 		MoveTurretTowards(AimDirection);
-	}
-	else
-	{
-		auto Time = GetWorld()->GetTimeSeconds();
-		UE_LOG(LogTemp, Warning, TEXT("%f no aim solution found"), Time);
 	}
 }
 
