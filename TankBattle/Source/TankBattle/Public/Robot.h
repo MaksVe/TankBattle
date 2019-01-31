@@ -7,6 +7,7 @@
 #include "Robot.generated.h"
 
 class URobotBarrel;
+class URobotTurret;
 class URobotAimingComponent;
 
 UCLASS()
@@ -32,6 +33,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(URobotBarrel* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(URobotTurret* TurretToSet);
 
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)

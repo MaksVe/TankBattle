@@ -8,6 +8,7 @@
 
 // Forward Declaration
 class URobotBarrel;
+class URobotTurret;
 
 
 // Hold barrels' properties and Elevate method
@@ -22,9 +23,11 @@ public:
 
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 	void SetBarrelReference(URobotBarrel* BarrelToSet);
-	// TODO add SetTurretReference
+	void SetTurretReference(URobotTurret* TurretToSet);
 private:
 	URobotBarrel* Barrel = nullptr;
+	URobotTurret* Turret = nullptr;
 
 	void MoveBarrelTowards(FVector AimDirection);
+	void MoveTurretTowards(FVector AimDirection);
 };

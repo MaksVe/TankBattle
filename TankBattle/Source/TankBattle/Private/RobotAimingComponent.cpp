@@ -6,6 +6,7 @@
 #include "Components/StaticMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "RobotBarrel.h"
+#include "RobotTurret.h"
 
 // Sets default values for this component's properties
 URobotAimingComponent::URobotAimingComponent()
@@ -20,6 +21,7 @@ URobotAimingComponent::URobotAimingComponent()
 void URobotAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
 	if (!Barrel) { return; }
+	if (!Turret) { return; }
 
 	FVector OUTLaunchVelocity(0);
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -45,6 +47,7 @@ void URobotAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 		UE_LOG(LogTemp, Warning, TEXT("%f aim solution found"), Time);
 		
 		MoveBarrelTowards(AimDirection);
+		MoveTurretTowards(AimDirection);
 	}
 	else
 	{
@@ -63,10 +66,25 @@ void URobotAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	Barrel->Elevate(DeltaRotator.Pitch);
 }
 
+void URobotAimingComponent::MoveTurretTowards(FVector AimDirection)
+{
+	auto TurretRotator = Turret->GetForwardVector().Rotation();
+	auto AimAsRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAsRotator - TurretRotator;
+
+	Turret->Rotate(DeltaRotator.Yaw);
+}
+
 void URobotAimingComponent::SetBarrelReference(URobotBarrel * BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
+
+void URobotAimingComponent::SetTurretReference(URobotTurret * TurretToSet)
+{
+	Turret = TurretToSet;
+}
+
 
 
 

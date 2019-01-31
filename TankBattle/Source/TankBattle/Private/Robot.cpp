@@ -22,6 +22,11 @@ void ARobot::SetBarrelReference(URobotBarrel * BarrelToSet)
 	RobotAimingComponent->SetBarrelReference(BarrelToSet);
 }
 
+void ARobot::SetTurretReference(URobotTurret * TurretToSet)
+{
+	RobotAimingComponent->SetTurretReference(TurretToSet);
+}
+
 // Called when the game starts or when spawned
 void ARobot::BeginPlay()
 {
