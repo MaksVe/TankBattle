@@ -9,6 +9,7 @@
 class URobotBarrel;
 class URobotTurret;
 class URobotAimingComponent;
+class AProjectile;
 
 UCLASS()
 class TANKBATTLE_API ARobot : public APawn
@@ -41,4 +42,10 @@ protected:
 private:
 	UPROPERTY(EditAnywhere, Category = Firing)
 	float LaunchSpeed = 100000.f; // TODO find sensible default
+
+	UPROPERTY(EditAnywhere, Category = Setup)
+	TSubclassOf<AProjectile> ProjectileBlueprint; // https://docs.unrealengine.com/en-US/Programming/UnrealArchitecture/TSubclassOf
+
+	// Local barrel reference for spawning projectile
+	URobotBarrel* Barrel = nullptr;
 };
