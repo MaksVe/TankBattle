@@ -2,7 +2,7 @@
 
 
 #include "RobotPlayerController.h"
-
+#include "Robot.h"
 #include "Engine/World.h"
 
 void ARobotPlayerController::BeginPlay()

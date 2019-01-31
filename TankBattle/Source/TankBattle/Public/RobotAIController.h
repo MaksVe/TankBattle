@@ -2,17 +2,12 @@
 
 #pragma once
 
-#include "Robot.h"
-
-
-
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "RobotAIController.generated.h"
 
-/**
- * 
- */
+class ARobot;
+
 UCLASS()
 class TANKBATTLE_API ARobotAIController : public AAIController
 {

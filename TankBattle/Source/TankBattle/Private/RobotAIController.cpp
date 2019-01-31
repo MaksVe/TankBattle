@@ -2,6 +2,7 @@
 
 #include "RobotAIController.h"
 
+#include "Robot.h"
 #include "Engine/World.h"
 #include "Engine/LocalPlayer.h"
 #include "GameFramework/PlayerController.h"

@@ -2,13 +2,12 @@
 
 #pragma once
 
-#include "RobotAimingComponent.h"
-
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Robot.generated.h"
 
 class URobotBarrel;
+class URobotAimingComponent;
 
 UCLASS()
 class TANKBATTLE_API ARobot : public APawn
@@ -28,9 +27,6 @@ protected:
 	URobotAimingComponent* RobotAimingComponent = nullptr;
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 

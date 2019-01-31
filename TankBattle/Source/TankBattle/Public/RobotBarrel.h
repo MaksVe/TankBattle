@@ -15,7 +15,9 @@ class TANKBATTLE_API URobotBarrel : public UStaticMeshComponent
 	GENERATED_BODY()
 
 public:
-	void Elevate(float DegreesPerSecond);
+	// max downward speed is -1
+	// max up movement +1
+	void Elevate(float RelativeSpeed);
 
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)

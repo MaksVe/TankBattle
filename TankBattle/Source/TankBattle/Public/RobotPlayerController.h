@@ -2,15 +2,14 @@
 
 #pragma once
 
-#include "Robot.h"
+
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerController.h"
 #include "RobotPlayerController.generated.h"
 
-/**
- * 
- */
+class ARobot;
+
 UCLASS()
 class TANKBATTLE_API ARobotPlayerController : public APlayerController
 {

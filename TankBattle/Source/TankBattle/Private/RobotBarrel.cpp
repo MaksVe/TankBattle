@@ -2,7 +2,11 @@
 
 #include "RobotBarrel.h"
 
-void URobotBarrel::Elevate(float DegreesPerSecond)
+void URobotBarrel::Elevate(float RelativeSpeed)
 {
-	UE_LOG(LogTemp, Warning, TEXT("Barrel->Elevate() called at speed %f"), DegreesPerSecond);
+	RelativeSpeed = FMath::Clamp<float>(RelativeSpeed, -1, +1);
+	auto ElevationChange = RelativeSpeed * MaxDegreesPerSecond * GetWorld()->DeltaTimeSeconds;
+	auto RawNewEvelation = RelativeRotation.Pitch + ElevationChange;
+	auto Elevation = FMath::Clamp<float>(RawNewEvelation, MinElevationDegrees, MaxElevationDegrees);
+	SetRelativeRotation(FRotator(Elevation, 0, 0));
 }
