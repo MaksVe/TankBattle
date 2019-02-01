@@ -40,11 +40,16 @@ protected:
 	URobotAimingComponent* RobotAimingComponent = nullptr;
 
 private:
-	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000.f; // TODO find sensible default
-
-	UPROPERTY(EditAnywhere, Category = Setup)
+	UPROPERTY(EditDefaultsOnly, Category = Setup)
 	TSubclassOf<AProjectile> ProjectileBlueprint; // https://docs.unrealengine.com/en-US/Programming/UnrealArchitecture/TSubclassOf
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTImeInSeconds = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float LaunchSpeed = 100000.f;
+
+	double LastFireTime = 0;
 
 	// Local barrel reference for spawning projectile
 	URobotBarrel* Barrel = nullptr;

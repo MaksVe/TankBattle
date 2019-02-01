@@ -16,8 +16,4 @@ class TANKBATTLE_API ARobotAIController : public AAIController
 public:
 	virtual void BeginPlay() override;
 	virtual void Tick(float DeltaTime) override;
-
-private:
-	ARobot* GetPlayerRobot() const;
-	ARobot* GetControlledRobot() const;
 };
